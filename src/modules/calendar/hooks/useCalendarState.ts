@@ -1,8 +1,9 @@
+import { useCallback } from "react";
+
 import {
   useGetCurrentDateMutation,
   useGetCurrentDateQuery,
 } from "@/state/currentDate";
-import { useCallback } from "react";
 
 export const useCalendarState = () => {
   const { mutate } = useGetCurrentDateMutation();
@@ -12,7 +13,7 @@ export const useCalendarState = () => {
     mutate(date);
   };
 
-  const onNextMonth = useCallback(() => {
+  const onSetNextMonth = useCallback(() => {
     if (currentDate) {
       const nextDate = new Date(currentDate);
 
@@ -23,7 +24,7 @@ export const useCalendarState = () => {
     }
   }, [currentDate, mutate]);
 
-  const onPrevMonth = useCallback(() => {
+  const onSetPrevMonth = useCallback(() => {
     if (currentDate) {
       const prevDate = new Date(currentDate);
 
@@ -34,10 +35,15 @@ export const useCalendarState = () => {
     }
   }, [currentDate, mutate]);
 
+  const onSetTodayDate = () => {
+    mutate(new Date());
+  };
+
   return {
     currentDate,
     onDaySelect,
-    onNextMonth,
-    onPrevMonth,
+    onSetNextMonth,
+    onSetPrevMonth,
+    onSetTodayDate,
   };
 };

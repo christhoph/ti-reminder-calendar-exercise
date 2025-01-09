@@ -7,9 +7,11 @@ import {
 
 import { useRemindersStep } from "./hooks/useRemindersStep";
 import { useRemindersMutate } from "./hooks/useRemindersMutate";
+import { useReminderUpdate } from "./hooks/useReminderUpdate";
 
 type RemindersContextState = ReturnType<typeof useRemindersStep> &
-  ReturnType<typeof useRemindersMutate>;
+  ReturnType<typeof useRemindersMutate> &
+  ReturnType<typeof useReminderUpdate>;
 
 const RemindersContext = createContext<RemindersContextState | null>(null);
 
@@ -32,14 +34,16 @@ export const RemindersContextProvider = ({
   children,
 }: RemindersContextProps) => {
   const remindersStep = useRemindersStep();
-  const reminderMutate = useRemindersMutate();
+  const remindersMutate = useRemindersMutate();
+  const remindersUpdate = useReminderUpdate();
 
   const value = useMemo(
     () => ({
+      ...remindersMutate,
       ...remindersStep,
-      ...reminderMutate,
+      ...remindersUpdate,
     }),
-    [reminderMutate, remindersStep]
+    [remindersMutate, remindersStep, remindersUpdate]
   );
 
   return (

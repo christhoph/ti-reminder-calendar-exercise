@@ -7,22 +7,22 @@ export const useRemindersStep = () => {
     RemindersSteps.REMINDERS_LIST
   );
 
-  const onAddReminder = () => {
+  const onAddReminderStep = () => {
     setRemindersStep(RemindersSteps.ADD_REMINDER);
   };
 
-  const onUpdateReminder = () => {
+  const onUpdateReminderStep = () => {
     setRemindersStep(RemindersSteps.UPDATE_REMINDER);
   };
 
-  const onShowRemindersList = () => {
+  const onShowRemindersListStep = () => {
     setRemindersStep(RemindersSteps.REMINDERS_LIST);
   };
 
   return {
     remindersStep,
-    onAddReminder,
-    onUpdateReminder,
-    onShowRemindersList,
+    onAddReminderStep,
+    onUpdateReminderStep,
+    onShowRemindersListStep,
   };
 };

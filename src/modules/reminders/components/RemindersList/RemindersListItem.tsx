@@ -10,12 +10,12 @@ type RemindersListItemProps = {
 };
 
 export const RemindersListItem = ({ reminder }: RemindersListItemProps) => {
-  const { onUpdateReminder } = useReminders();
+  const { onSetReminderToUpdate, onUpdateReminderStep } = useReminders();
 
   const handleUpdateReminder = useCallback(() => {
-    // TODO:: pending to set the reminder info to update
-    onUpdateReminder();
-  }, [onUpdateReminder]);
+    onSetReminderToUpdate(reminder);
+    onUpdateReminderStep();
+  }, [onSetReminderToUpdate, onUpdateReminderStep, reminder]);
 
   const { color, title, description, time } = reminder;
 

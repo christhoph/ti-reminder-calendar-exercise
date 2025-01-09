@@ -1,11 +1,11 @@
 import { useReminders } from "../../Reminders.provider";
 
 export const AddReminderButton = () => {
-  const { onAddReminder } = useReminders();
+  const { onAddReminderStep } = useReminders();
 
   return (
     <button
-      onClick={onAddReminder}
+      onClick={onAddReminderStep}
       className="bg-highlight-gradient rounded text-base text-white py-3 px-10"
     >
       Add reminder

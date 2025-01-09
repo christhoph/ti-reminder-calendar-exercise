@@ -24,7 +24,52 @@ export function useCreateRemindersMutation() {
   });
 }
 
+type ReminderToUpdate = {
+  reminder: Reminder;
+  prevReminderDate?: string;
+};
+
 export function useUpdateRemindersMutation() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (data: ReminderToUpdate) => data,
+    onSuccess: ({ reminder, prevReminderDate }) => {
+      const remindersKey = getRemindersKey();
+
+      const queryData = queryClient.getQueryData<RemindersMap>(remindersKey);
+
+      const isSameDate = reminder.date === prevReminderDate;
+
+      if (isSameDate) {
+        const remindersList = queryData?.get(reminder.date) ?? [];
+
+        const remindersListUpdated = remindersList.map((item) =>
+          item.id === reminder.id ? reminder : item
+        );
+
+        queryData?.set(reminder.date, remindersListUpdated);
+      }
+
+      if (prevReminderDate && !isSameDate) {
+        const remindersList = queryData?.get(reminder.date) ?? [];
+        const prevRemindersList = queryData?.get(prevReminderDate) ?? [];
+
+        const remindersListUpdated = [...remindersList, reminder];
+        const prevRemindersListUpdated = prevRemindersList.filter(
+          (item) => item.id !== reminder.id
+        );
+
+        queryData?.set(reminder.date, remindersListUpdated);
+        queryData?.set(prevReminderDate, prevRemindersListUpdated);
+      }
+
+      queryClient.setQueryData(remindersKey, () => queryData);
+    },
+  });
+}
+
+export function useRemoveRemindersMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -36,14 +81,11 @@ export function useUpdateRemindersMutation() {
 
       const remindersList = queryData?.get(data.date) ?? [];
 
-      // TODO:: take into account when it is a different date
-      if (remindersList.length) {
-        const remindersUpdatedList = remindersList.map((reminder) =>
-          reminder.date === data.date ? data : reminder
-        );
+      const reminderListUpdated = remindersList.filter(
+        (item) => item.id !== data.id
+      );
 
-        queryData?.set(data.date, remindersUpdatedList);
-      }
+      queryData?.set(data.date, reminderListUpdated);
 
       queryClient.setQueryData(remindersKey, () => queryData);
     },

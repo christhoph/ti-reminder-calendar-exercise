@@ -3,21 +3,24 @@ import { ArrowChevronLeft, ArrowChevronRight } from "@/components/icons";
 import { useCalendar } from "../Calendar.provider";
 
 export const CalendarActions = () => {
-  const { onNextMonth, onPrevMonth } = useCalendar();
+  const { onSetNextMonth, onSetPrevMonth, onSetTodayDate } = useCalendar();
 
   return (
     <div className="flex items-center justify-center gap-2 mb-4">
       <button
-        onClick={onPrevMonth}
+        onClick={onSetPrevMonth}
         className="h-6 w-6 flex items-center justify-center"
       >
         <ArrowChevronLeft />
       </button>
 
-      <div className="h-1.5 w-1.5 bg-light-gray rounded-full" />
+      <button
+        onClick={onSetTodayDate}
+        className="h-1.5 w-1.5 bg-light-gray rounded-full"
+      />
 
       <button
-        onClick={onNextMonth}
+        onClick={onSetNextMonth}
         className="h-6 w-6 flex items-center justify-center"
       >
         <ArrowChevronRight />

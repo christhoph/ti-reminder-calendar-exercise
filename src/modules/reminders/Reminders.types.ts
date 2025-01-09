@@ -5,6 +5,7 @@ export enum RemindersSteps {
 }
 
 export type Reminder = {
+  id: string;
   title: string;
   description: string;
   date: string;

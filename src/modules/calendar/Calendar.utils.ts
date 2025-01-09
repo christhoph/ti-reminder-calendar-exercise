@@ -16,14 +16,6 @@ export class CalendarManager {
     return this.now.getFullYear();
   }
 
-  public areDatesEqual(firstDate: Date, secondDate: Date): boolean {
-    return (
-      firstDate.getFullYear() === secondDate.getFullYear() &&
-      firstDate.getMonth() === secondDate.getMonth() &&
-      firstDate.getDate() === secondDate.getDate()
-    );
-  }
-
   public getDaysOfTheMonth(): DateNullish[] {
     const days: DateNullish[] = [];
     const month = this.now.getMonth();

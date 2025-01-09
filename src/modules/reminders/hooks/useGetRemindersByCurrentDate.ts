@@ -1,8 +1,8 @@
+import { format } from "date-fns";
 import { useCallback } from "react";
 
 import { useGetRemindersQuery } from "@/state/reminders";
 import { useGetCurrentDateQuery } from "@/state/currentDate";
-import { format } from "date-fns";
 
 export const useGetRemindersByCurrentDate = () => {
   const { data: currentDate } = useGetCurrentDateQuery();

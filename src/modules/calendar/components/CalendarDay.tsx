@@ -1,5 +1,7 @@
 import classNames from "classnames";
 
+import { areDatesEqual } from "@/utils";
+
 import { useCalendar } from "../Calendar.provider";
 
 type CalendarDayProps = {
@@ -7,10 +9,10 @@ type CalendarDayProps = {
 };
 
 export const CalendarDay = ({ day }: CalendarDayProps) => {
-  const { currentDate, calendar, onDaySelect } = useCalendar();
+  const { currentDate, onDaySelect } = useCalendar();
 
-  const isToday = calendar.areDatesEqual(day, new Date());
-  const isSelected = currentDate && calendar.areDatesEqual(day, currentDate);
+  const isToday = areDatesEqual(day, new Date());
+  const isSelected = currentDate && areDatesEqual(day, currentDate);
   // TODO:: implement logic to know if it have reminders
   const hasReminders = false;
 
