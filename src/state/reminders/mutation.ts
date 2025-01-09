@@ -85,7 +85,11 @@ export function useRemoveRemindersMutation() {
         (item) => item.id !== data.id
       );
 
-      queryData?.set(data.date, reminderListUpdated);
+      if (reminderListUpdated.length) {
+        queryData?.set(data.date, reminderListUpdated);
+      } else {
+        queryData?.delete(data.date);
+      }
 
       queryClient.setQueryData(remindersKey, () => queryData);
     },

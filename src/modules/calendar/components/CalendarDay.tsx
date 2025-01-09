@@ -3,18 +3,19 @@ import classNames from "classnames";
 import { areDatesEqual } from "@/utils";
 
 import { useCalendar } from "../Calendar.provider";
+import { useCheckForReminders } from "../hooks/useCheckForReminders";
 
 type CalendarDayProps = {
   day: Date;
 };
 
 export const CalendarDay = ({ day }: CalendarDayProps) => {
+  const checkForReminders = useCheckForReminders();
   const { currentDate, onDaySelect } = useCalendar();
 
+  const hasReminders = checkForReminders(day);
   const isToday = areDatesEqual(day, new Date());
   const isSelected = currentDate && areDatesEqual(day, currentDate);
-  // TODO:: implement logic to know if it have reminders
-  const hasReminders = false;
 
   const handleDaySelect = () => {
     onDaySelect(day);

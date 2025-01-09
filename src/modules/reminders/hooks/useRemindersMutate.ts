@@ -1,7 +1,6 @@
 import { parse } from "date-fns";
 import { useCallback, useMemo } from "react";
 
-import { areDatesEqual } from "@/utils";
 import {
   useCreateRemindersMutation,
   useRemoveRemindersMutation,
@@ -27,9 +26,7 @@ export const useRemindersMutate = () => {
       if (currentDate) {
         const reminderDate = parse(reminderDateStr, "MM/dd/yyyy", new Date());
 
-        if (!areDatesEqual(currentDate, reminderDate)) {
-          updateCurrentDateMutate(reminderDate);
-        }
+        updateCurrentDateMutate(reminderDate);
       }
     },
     [currentDate, updateCurrentDateMutate]
@@ -55,8 +52,9 @@ export const useRemindersMutate = () => {
   const onRemoveReminder = useCallback(
     (reminder: Reminder) => {
       removeRemindersMutate(reminder);
+      onUpdateCurrentDate(reminder.date);
     },
-    [removeRemindersMutate]
+    [onUpdateCurrentDate, removeRemindersMutate]
   );
 
   const value = useMemo(
