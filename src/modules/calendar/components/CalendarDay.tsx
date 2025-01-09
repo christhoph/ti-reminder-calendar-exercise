@@ -10,7 +10,7 @@ export const CalendarDay = ({ day }: CalendarDayProps) => {
   const { currentDate, calendar, onDaySelect } = useCalendar();
 
   const isToday = calendar.areDatesEqual(day, new Date());
-  const isSelected = calendar.areDatesEqual(day, currentDate);
+  const isSelected = currentDate && calendar.areDatesEqual(day, currentDate);
   // TODO:: implement logic to know if it have reminders
   const hasReminders = false;
 

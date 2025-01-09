@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { baseFieldStyle } from "./ReminderForm.constants";
@@ -8,8 +9,10 @@ import { DateFormField } from "./DateFormField";
 import { FormActions } from "./FormActions";
 
 import { Reminder } from "../../Reminders.types";
+import { useReminders } from "../../Reminders.provider";
 
 export const ReminderForm = () => {
+  const { remindersStep, onSaveReminder, onShowRemindersList } = useReminders();
   const {
     control,
     formState: { errors },
@@ -23,10 +26,14 @@ export const ReminderForm = () => {
     setValue("color", color);
   };
 
-  const onSubmit: SubmitHandler<Reminder> = (data) => {
-    // TODO:: implement submit logic
-    console.log(data);
-  };
+  const onSubmit: SubmitHandler<Reminder> = useCallback(
+    (data) => {
+      onSaveReminder(data, remindersStep);
+
+      onShowRemindersList();
+    },
+    [onSaveReminder, onShowRemindersList, remindersStep]
+  );
 
   const colorSelected = watch("color");
 

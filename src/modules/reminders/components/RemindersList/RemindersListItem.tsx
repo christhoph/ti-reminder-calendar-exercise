@@ -1,14 +1,24 @@
+import { useCallback } from "react";
+
 import { ClockIcon, PencilIcon } from "@/components/icons";
 import { Reminder } from "@/modules/reminders/Reminders.types";
 
-type RemindersListItemProps = Reminder;
+import { useReminders } from "../../Reminders.provider";
 
-export const RemindersListItem = ({
-  color,
-  title,
-  description,
-  time,
-}: RemindersListItemProps) => {
+type RemindersListItemProps = {
+  reminder: Reminder;
+};
+
+export const RemindersListItem = ({ reminder }: RemindersListItemProps) => {
+  const { onUpdateReminder } = useReminders();
+
+  const handleUpdateReminder = useCallback(() => {
+    // TODO:: pending to set the reminder info to update
+    onUpdateReminder();
+  }, [onUpdateReminder]);
+
+  const { color, title, description, time } = reminder;
+
   return (
     <div className="flex min-h-[134px] w-full shadow-xxl relative rounded-3xl">
       <div className="p-3 pr-0">
@@ -29,7 +39,10 @@ export const RemindersListItem = ({
         <span className="text-3xl text-medium-gray">{time}</span>
       </div>
 
-      <button className="flex items-center justify-center h-9 w-9 rounded-full bg-edit-gradient absolute -bottom-3 -right-3">
+      <button
+        onClick={handleUpdateReminder}
+        className="flex items-center justify-center h-9 w-9 rounded-full bg-edit-gradient absolute -bottom-3 -right-3"
+      >
         <PencilIcon />
       </button>
     </div>

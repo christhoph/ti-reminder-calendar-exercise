@@ -15,7 +15,7 @@ export const RemindersList = ({ reminders = [] }: RemindersListProps) => {
   return (
     <div className="w-full flex flex-col gap-8 overflow-y-auto p-6 scrollable-list">
       {reminders.map((reminder) => (
-        <RemindersListItem {...reminder} key={reminder.title} />
+        <RemindersListItem key={reminder.title} reminder={reminder} />
       ))}
     </div>
   );

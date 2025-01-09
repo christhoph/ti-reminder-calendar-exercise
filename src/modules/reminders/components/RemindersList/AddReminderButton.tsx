@@ -1,22 +1,12 @@
-import classNames from "classnames";
-import type { ButtonHTMLAttributes } from "react";
+import { useReminders } from "../../Reminders.provider";
 
-type AddReminderButtonProps = Omit<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  "children"
->;
+export const AddReminderButton = () => {
+  const { onAddReminder } = useReminders();
 
-export const AddReminderButton = ({
-  className,
-  ...props
-}: AddReminderButtonProps) => {
   return (
     <button
-      {...props}
-      className={classNames(
-        "bg-highlight-gradient rounded text-base text-white py-3 px-10",
-        className
-      )}
+      onClick={onAddReminder}
+      className="bg-highlight-gradient rounded text-base text-white py-3 px-10"
     >
       Add reminder
     </button>

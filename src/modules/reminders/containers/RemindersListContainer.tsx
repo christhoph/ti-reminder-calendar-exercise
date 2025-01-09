@@ -1,19 +1,26 @@
-import { Reminder } from "../Reminders.types";
-import { RemindersHeader } from "../components/RemindersHeader";
+import classNames from "classnames";
+
 import { RemindersList } from "../components/RemindersList/RemindersList";
-import { AddReminderButton } from "../components/RemindersList/AddReminderButton";
+import { useGetRemindersByCurrentDate } from "../hooks/useGetRemindersByCurrentDate";
+import { RemindersListHeader } from "../components/RemindersHeader/RemindersListHeader";
 
 export const RemindersListContainer = () => {
-  // TODO:: get the created reminders
-  const reminders: Reminder[] = [];
+  const getRemindersByCurrentDate = useGetRemindersByCurrentDate();
+
+  const reminders = getRemindersByCurrentDate();
 
   return (
     <>
-      <RemindersHeader title="Friday, August 26, 2022">
-        <AddReminderButton />
-      </RemindersHeader>
+      <RemindersListHeader />
 
-      <div className="h-[calc(100% - 3rem)] max-h-[calc(100% - 3rem)] flex flex-col flex-1 items-center justify-center overflow-hidden mt-8 -mx-6">
+      <div
+        className={classNames(
+          "h-[calc(100% - 3rem)] max-h-[calc(100% - 3rem)] flex flex-col flex-1 items-center overflow-hidden mt-8 -mx-6",
+          {
+            "justify-center": !reminders.length,
+          }
+        )}
+      >
         <RemindersList reminders={reminders} />
       </div>
     </>

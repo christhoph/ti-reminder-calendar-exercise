@@ -3,17 +3,13 @@ import {
   type PropsWithChildren,
   useContext,
   useMemo,
-  useState,
 } from "react";
 
 import { CalendarManager } from "./Calendar.utils";
+import { useCalendarState } from "./hooks/useCalendarManage";
 
-type CalendarContextState = {
-  currentDate: Date;
+type CalendarContextState = ReturnType<typeof useCalendarState> & {
   calendar: CalendarManager;
-  onDaySelect: (date: Date) => void;
-  onNextMonth: () => void;
-  onPrevMonth: () => void;
 };
 
 const CalendarContext = createContext<CalendarContextState | null>(null);
@@ -34,43 +30,14 @@ export const useCalendar = () => {
 type CalendarContextProps = PropsWithChildren;
 
 export const CalendarContextProvider = ({ children }: CalendarContextProps) => {
-  const [currentDate, setCurrentDate] = useState<Date>(() => new Date());
-
-  const onDaySelect = (date: Date) => {
-    setCurrentDate(date);
-  };
-
-  const onNextMonth = () => {
-    setCurrentDate((prev) => {
-      const cloneDate = new Date(prev);
-
-      cloneDate.setMonth(prev.getMonth() + 1);
-      cloneDate.setDate(1);
-
-      return cloneDate;
-    });
-  };
-
-  const onPrevMonth = () => {
-    setCurrentDate((prev) => {
-      const cloneDate = new Date(prev);
-
-      cloneDate.setMonth(prev.getMonth() - 1);
-      cloneDate.setDate(1);
-
-      return cloneDate;
-    });
-  };
+  const calendarState = useCalendarState();
 
   const value = useMemo(
     () => ({
-      currentDate,
-      calendar: new CalendarManager(currentDate),
-      onDaySelect,
-      onNextMonth,
-      onPrevMonth,
+      ...calendarState,
+      calendar: new CalendarManager(calendarState.currentDate),
     }),
-    [currentDate]
+    [calendarState]
   );
 
   return (
