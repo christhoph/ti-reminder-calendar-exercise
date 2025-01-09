@@ -13,3 +13,32 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+/* Custom styles for reminders list */
+
+.scrollable-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollable-list::-webkit-scrollbar-thumb {
+  background-color: #421f91;
+  border-radius: 100px;
+}
+
+/* Custom styles for reminder form */
+
+.custom-time-input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+.custom-time-placeholder:before {
+  content: "HH:MM";
+  color: #38404280;
+  position: absolute;
+  background: #fff;
+  cursor: text;
+}
+
+.custom-time-placeholder:focus:before {
+  content: "";
+}

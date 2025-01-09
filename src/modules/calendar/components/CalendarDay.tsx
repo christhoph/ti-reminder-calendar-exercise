@@ -25,7 +25,7 @@ export const CalendarDay = ({ day }: CalendarDayProps) => {
         "flex flex-1 items-center justify-center rounded-full hover:bg-white hover:text-blue-500 relative",
         {
           "bg-white text-blue-500": isSelected,
-          "bg-highlight-gradient hover:from-white hover:to-white":
+          "bg-highlight-gradient hover:bg-highlight-gradient-hover":
             isToday && !isSelected,
         }
       )}
