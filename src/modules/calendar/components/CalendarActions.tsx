@@ -6,7 +6,7 @@ export const CalendarActions = () => {
   const { onSetNextMonth, onSetPrevMonth, onSetTodayDate } = useCalendar();
 
   return (
-    <div className="flex items-center justify-center gap-2 mb-4">
+    <div className="flex items-center justify-center gap-1 mb-4">
       <button
         onClick={onSetPrevMonth}
         className="h-6 w-6 flex items-center justify-center"
@@ -14,10 +14,9 @@ export const CalendarActions = () => {
         <ArrowChevronLeft />
       </button>
 
-      <button
-        onClick={onSetTodayDate}
-        className="h-1.5 w-1.5 bg-light-gray rounded-full"
-      />
+      <button onClick={onSetTodayDate} className="p-1.5">
+        <div className="h-1.5 w-1.5 bg-light-gray rounded-full" />
+      </button>
 
       <button
         onClick={onSetNextMonth}
