@@ -6,7 +6,7 @@ import {
 } from "react";
 
 import { CalendarManager } from "./Calendar.utils";
-import { useCalendarState } from "./hooks/useCalendarManage";
+import { useCalendarState } from "./hooks/useCalendarState";
 
 type CalendarContextState = ReturnType<typeof useCalendarState> & {
   calendar: CalendarManager;
