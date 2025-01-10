@@ -36,7 +36,10 @@ export const CalendarDay = ({ day }: CalendarDayProps) => {
       {day.getDate()}
 
       {hasReminders && (
-        <span className="h-1.5 w-1.5 bg-bright-cyan rounded-full absolute top-2 right-0" />
+        <span
+          data-testid="calendar-day-indicator"
+          className="h-1.5 w-1.5 bg-bright-cyan rounded-full absolute top-2 right-0"
+        />
       )}
     </button>
   );

@@ -11,11 +11,15 @@ export const RemindersListItem = ({ reminder }: RemindersListItemProps) => {
   const { color, title, description, time } = reminder;
 
   return (
-    <div className="flex min-h-[134px] w-full shadow-xxl relative rounded-3xl">
+    <div
+      data-testid="reminders-list-item"
+      className="flex min-h-[134px] w-full shadow-xxl relative rounded-3xl"
+    >
       <div className="p-3 pr-0">
         <div
           className="h-full w-3 rounded-3xl"
           style={{ backgroundColor: color }}
+          data-testid="reminders-list-item-color"
         />
       </div>
 

@@ -74,12 +74,12 @@ export const ReminderForm = () => {
         >
           <input
             id="title"
-            maxLength={25}
+            maxLength={30}
             placeholder="Title"
             className={baseFieldStyle}
             {...register("title", {
               required: "Please fill out the 'Title' field.",
-              maxLength: 25,
+              maxLength: 30,
             })}
           />
         </FormField>

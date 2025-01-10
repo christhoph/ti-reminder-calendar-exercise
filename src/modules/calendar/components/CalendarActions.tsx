@@ -6,7 +6,10 @@ export const CalendarActions = () => {
   const { onSetNextMonth, onSetPrevMonth, onSetTodayDate } = useCalendar();
 
   return (
-    <div className="flex items-center justify-center gap-1 mb-4">
+    <div
+      data-testid="calendar-actions"
+      className="flex items-center justify-center gap-1 mb-4"
+    >
       <button
         onClick={onSetPrevMonth}
         className="h-6 w-6 flex items-center justify-center"

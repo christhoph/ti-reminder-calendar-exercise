@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import {
   createContext,
   type PropsWithChildren,
@@ -5,16 +6,15 @@ import {
   useMemo,
 } from "react";
 
-import { CalendarManager } from "./Calendar.utils";
+import { CalendarManager } from "./utils/CalendarManager";
 import { useCalendarState } from "./hooks/useCalendarState";
 
-type CalendarContextState = ReturnType<typeof useCalendarState> & {
+export type CalendarContextState = ReturnType<typeof useCalendarState> & {
   calendar: CalendarManager;
 };
 
-const CalendarContext = createContext<CalendarContextState | null>(null);
+export const CalendarContext = createContext<CalendarContextState | null>(null);
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useCalendar = () => {
   const context = useContext(CalendarContext);
 

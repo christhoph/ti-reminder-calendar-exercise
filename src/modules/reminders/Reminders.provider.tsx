@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import {
   createContext,
   type PropsWithChildren,
@@ -9,13 +10,14 @@ import { useRemindersStep } from "./hooks/useRemindersStep";
 import { useRemindersMutate } from "./hooks/useRemindersMutate";
 import { useReminderUpdate } from "./hooks/useReminderUpdate";
 
-type RemindersContextState = ReturnType<typeof useRemindersStep> &
+export type RemindersContextState = ReturnType<typeof useRemindersStep> &
   ReturnType<typeof useRemindersMutate> &
   ReturnType<typeof useReminderUpdate>;
 
-const RemindersContext = createContext<RemindersContextState | null>(null);
+export const RemindersContext = createContext<RemindersContextState | null>(
+  null
+);
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useReminders = () => {
   const context = useContext(RemindersContext);
 

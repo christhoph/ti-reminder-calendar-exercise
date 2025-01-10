@@ -4,7 +4,10 @@ export const CalendarHeader = () => {
   const { calendar } = useCalendar();
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div
+      data-testid="calendar-header"
+      className="flex flex-col items-center justify-center"
+    >
       <h2 className="font-black text-5rem leading-none">
         {calendar.getYear()}
       </h2>

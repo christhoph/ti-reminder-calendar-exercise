@@ -1,5 +1,5 @@
-import { MONTHS } from "./Calendar.constants";
-import { DateNullish } from "./Calendar.types";
+import { MONTHS } from "../Calendar.constants";
+import { DateNullish } from "../Calendar.types";
 
 export class CalendarManager {
   private now: Date;
