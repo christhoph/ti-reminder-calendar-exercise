@@ -61,7 +61,12 @@ export function useUpdateRemindersMutation() {
         );
 
         queryData?.set(reminder.date, remindersListUpdated);
-        queryData?.set(prevReminderDate, prevRemindersListUpdated);
+
+        if (prevRemindersList.length) {
+          queryData?.set(prevReminderDate, prevRemindersListUpdated);
+        } else {
+          queryData?.delete(prevReminderDate);
+        }
       }
 
       queryClient.setQueryData(remindersKey, () => queryData);
